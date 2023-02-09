@@ -26,11 +26,11 @@ namespace GuessingGameTemplate4U
 
         private void guessButton_Click(object sender, EventArgs e)
         {
-            
+            Form1.guessCount++; 
             int guess = Convert.ToInt16(inputBox.Text);
 
             //TODO add guess to List of guesses on Form1
-
+            Form1.guess.Add(guess); 
 
             if (guess < rand)
             {
@@ -48,6 +48,13 @@ namespace GuessingGameTemplate4U
 
                 //TODO close this screen and open a Results Screen (you need to create this)
 
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+
+                ResultScreen rs = new ResultScreen();
+                rs.Location = new Point((f.ClientSize.Width - rs.Width) / 2, (f.ClientSize.Height - rs.Width) / 2);
+                rs.Focus(); 
+                f.Controls.Add(rs);
             }
 
             inputBox.Text = "";
